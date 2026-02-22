@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <!-- <title>{{ page.title }} | FlexML KAIST</title> -->
+    <title>{% if page.title %}{{ page.title }} | {{ site.title }}{% else %}{{ site.title }} — {{ site.lab.tagline }}{% endif %}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+    {% if page.extra_css %}
+        {% for css in page.extra_css %}
+            <link rel="stylesheet" href="{{ css | relative_url }}">
+        {% endfor %}
+    {% endif %}
+</head>
+
+<body class="{{ page.body_class }}">
+    <nav class="nav" id="mainNav">
+        <div class="nav__inner">
+            <a href="{{ '/' | relative_url }}" class="nav__logo">
+                <!-- <div class="nav__logo-mark"></div> -->
+                <img src="/assets/imgs/flexml_logo.png"  width="50" height="50" alt="FlexML Logo" class="nav__logo-img">
+                <div class="nav__logo-text">
+                     <span class="nav__logo-name">FlexML <span>Lab</span></span>
+                    <span class="nav__logo-sub">KAIST Electrical Engineering</span>
+                </div>
+            </a>
+            <ul class="nav__menu" id="navMenu">
+                <li class="nav__item"><a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+                <li class="nav__item"><a href="{{ '/people' | relative_url }}" {% if page.url contains '/people' %}class="active"{% endif %}>Members</a></li>
+                <li class="nav__item"><a href="{{ '/research' | relative_url }}" {% if page.url contains '/research' %}class="active"{% endif %}>Research</a></li>
+                <li class="nav__item"><a href="{{ '/publications' | relative_url }}" {% if page.url contains '/publications' %}class="active"{% endif %}>Publications</a></li>
+                <!-- <li class="nav__item"><a href="{{ '/news' | relative_url }}" {% if page.url contains '/news' %}class="active"{% endif %}>News</a></li> -->
+                <!-- <li class="nav__item"><a href="{{ '/contact' | relative_url }}" {% if page.url contains '/contact' %}class="active"{% endif %}>Contact</a></li> -->
+            </ul>
+
+            <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            Copyright &copy; 2026 Flexible Machine Learning (FlexML) Lab, KAIST EE. All rights reserved.
+        </div>
+    </footer>
+            
+
+</body>
+</html>
