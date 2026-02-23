@@ -64,7 +64,89 @@
             Copyright &copy; 2026 Flexible Machine Learning (FlexML) Lab, KAIST EE. All rights reserved.
         </div>
     </footer>
-            
+
+    <script>
+    // Navigation scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+        nav.classList.add('scrolled');
+        } else {
+        nav.classList.remove('scrolled');
+        }
+    });
+
+    // Mobile menu toggle
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('navMenu');
+
+    function closeMenu() {
+        if (!menu || !toggle) return;
+        menu.classList.remove('open');
+        const spans = toggle.querySelectorAll('span');
+        spans[0].style.transform = '';
+        spans[1].style.opacity = '';
+        spans[2].style.transform = '';
+    }
+
+    if (toggle && menu) {
+        toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+        const spans = toggle.querySelectorAll('span');
+        if (menu.classList.contains('open')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+        } else {
+            spans[0].style.transform = '';
+            spans[1].style.opacity = '';
+            spans[2].style.transform = '';
+        }
+        });
+
+        // Close menu when a nav link is clicked
+        menu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+        });
+    }
+
+    // Close menu on outside click
+    document.addEventListener('click', (e) => {
+        if (nav && !nav.contains(e.target)) {
+        closeMenu();
+        }
+    });
+
+    // Intersection Observer for animations
+    const animElements = document.querySelectorAll('[data-animate]');
+    if (animElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, i * 80);
+            observer.unobserve(entry.target);
+            }
+        });
+        }, { threshold: 0.1 });
+
+        animElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+        });
+    }
+    </script>
+
+    {% if page.extra_js %}
+    {% for js in page.extra_js %}
+        <script src="{{ js | relative_url }}"></script>
+    {% endfor %}
+    {% endif %}
 
 </body>
 </html>
