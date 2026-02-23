@@ -43,7 +43,7 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  overflow-y: scroll;
+  scrollbar-gutter: stable; 
 }
 
 body {
@@ -831,6 +831,10 @@ p { margin-bottom: 1rem; color: var(--text-secondary); }
 .pub-link--website { color: #6f42c1; border-color: #6f42c1; }
 .pub-link--website:hover { background: #6f42c1; color: white; }
 
+.pub-year-group + .pub-year-group {
+  margin-top: 48px;
+}
+
 /* =====================================================
    PEOPLE
    ===================================================== */
@@ -1561,3 +1565,4 @@ p { margin-bottom: 1rem; color: var(--text-secondary); }
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
